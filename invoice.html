@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proforma Invoice</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Load jsPDF and plugins first -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+    <!-- Load the custom font BEFORE your script -->
+    <script src="NotoSans-Regular-normal.js"></script>
+
+    <!-- Then load your script that calls generatePDF() -->
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Proforma Invoice Generator</h2>
+
+      <label>Date:</label>
+      <input type="date" id="date" />
+
+      <label>Client Name:</label>
+      <input type="text" id="name" placeholder="e.g. M/s ABC Pvt Ltd" />
+
+      <label>Client Address:</label>
+      <input type="text" id="address" placeholder="e.g. 123 Main Street" />
+
+      <label>Mobile No:</label>
+      <input type="text" id="mobile" placeholder="+91-XXXXXXXXXX" />
+
+      <label>GST No:</label>
+      <input type="text" id="gst" placeholder="22AAAAA0000A1Z5" />
+
+      <div id="products"></div>
+      <button onclick="addProduct()">+ Add Product</button>
+
+      <br />
+
+      <label for="gstRate">GST Rate:</label>
+      <select id="gstRate">
+        <option value="12">12%</option>
+        <option value="18">18%</option>
+      </select>
+
+      <label>Advance Payment Option:</label>
+      <select id="advance">
+        <option value="100% ADVANCE PAYMENT">100% ADVANCE PAYMENT</option>
+        <option value="50% ADVANCE & 50% BEFORE DISPATCH">
+          50% ADVANCE & 50% BEFORE DISPATCH
+        </option>
+      </select>
+
+      <label>Transport Charges:</label>
+      <select id="transport">
+        <option value="TRANSPORT CHARGES EXTRA / TO PAY">
+          TRANSPORT CHARGES EXTRA / TO PAY
+        </option>
+        <option value="NONE">NONE</option>
+      </select>
+
+      <button onclick="generatePDF()">Generate PDF</button>
+    </div>
+  </body>
+</html>
