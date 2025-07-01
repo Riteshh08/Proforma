@@ -62,7 +62,7 @@ async function generatePDF() {
 
     doc.setFontSize(10);
     doc.text("1099,BUDHWAR PETH, NEXT TO DATTA MANDIR, PUNE 411002", 105, y + 18, { align: "center" });
-    doc.text("Phone: +91- 93729 49460 | Email: anchor1099@gmail.com", 105, y + 23, { align: "center" });
+    doc.text("Phone: +91- 93729 49460 | Email: sales@anchorumbrella.com", 105, y + 23, { align: "center" });
 
   const inputDate = document.getElementById("date").value; // e.g., "2025-07-01"
   const dateObj = new Date(inputDate);
@@ -144,7 +144,8 @@ doc.autoTable({
   doc.text("Bank: Bank Of India ,Pune City Branch.", x, y + 44);
   doc.text("A/C No: 050630100000042", x, y + 50);
   doc.text("Type: C/C. A/c ", x, y + 56);
-  doc.text("IFSC / GPAY: BKID0000506 / GPAY NO - 9372949460", x, y + 62);
+  doc.text("IFSC: BKID0000506", x, y + 62);
+  doc.text("GPAY NO.: 9372949460", x, y + 68);
 
 //   const qrImg = new Image();
 //   qrImg.src = qrImagePath;
