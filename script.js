@@ -64,8 +64,17 @@ async function generatePDF() {
     doc.text("1099,BUDHWAR PETH, NEXT TO DATTA MANDIR, PUNE 411002", 105, y + 18, { align: "center" });
     doc.text("Phone: +91- 93729 49460 | Email: anchor1099@gmail.com", 105, y + 23, { align: "center" });
 
-    const date = document.getElementById("date").value;
-    doc.text(`Date: ${date}`, 160, y + 30);
+  const inputDate = document.getElementById("date").value; // e.g., "2025-07-01"
+  const dateObj = new Date(inputDate);
+
+  // Format to dd/mm/yyyy
+  const day = String(dateObj.getDate()).padStart(2, '0');
+  const month = String(dateObj.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+  const year = dateObj.getFullYear();
+
+  const formattedDate = `${day}/${month}/${year}`;
+
+  doc.text(`Date: ${formattedDate}`, 160, y + 30);
 
   y += 40;
   doc.setFontSize(12);
