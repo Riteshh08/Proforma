@@ -173,19 +173,20 @@
         const QR_FILENAME = "qr-code.png";
 
         // 2. Your Company Details
-        const COMPANY_NAME = "YOUR COMPANY NAME HERE";
-        const COMPANY_ADDRESS = "123, Business Park, City, State - Pin";
-        const COMPANY_CONTACT = "Phone: 9876543210 | Email: sales@example.com";
-        const COMPANY_GST = "27ABCDE1234F1Z5";
-        const COMPANY_PAN = "ABCDE1234F";
+        const COMPANY_NAME = "SHREE DATTA TRUNK & UMBRELLA MART";
+        const COMPANY_ADDRESS = "1099,BUDHWAR PETH, NEXT TO DATTA MANDIR, PUNE 411002";
+        const COMPANY_CONTACT = "Phone: +91-93729 49460 | Email: sales@anchorumbrella.com";
+        const COMPANY_GST = "27ACPFS2215Q1ZH";
+        const COMPANY_PAN = "ACPFS2215Q";
 
         // 3. Your Bank Details
         const BANK_DETAILS = {
-            bankName: "HDFC Bank",
-            acName: "YOUR COMPANY ACCOUNT NAME",
-            acNo: "1234567890",
-            ifsc: "HDFC0001234",
-            upiId: "yourname@okhdfc"
+            bankName: "Bank Of India ,Pune City Branch.",
+            acName: "Shree Datta Trunk & Umbrella Mart",
+            acNo: "050630100000042",
+            acType: "C/C. A/c",
+            ifsc: "BKID0000506",
+            upiId: "boim-050694600042@boi"
         };
 
         // ==========================================
@@ -204,7 +205,6 @@
             div.className = "product-row";
             div.id = `row-${productCount}`;
             
-            // Note the onchange event in the select box
             div.innerHTML = `
                 <div class="col-lg">
                     <label>Product</label>
@@ -239,7 +239,6 @@
             container.appendChild(div);
         }
 
-        // Logic to show/hide custom text box
         function toggleCustomInput(id) {
             const select = document.getElementById(`select${id}`);
             const wrapper = document.getElementById(`customWrapper${id}`);
@@ -324,19 +323,16 @@
             let subtotal = 0;
             let srNo = 1;
 
-            // Loop through UI rows and gather data
             for (let div of productDivs) {
-                // We extract elements by looking inside the specific row div
                 const select = div.querySelector("select");
-                const customInput = div.querySelector("input[id^='customName']"); // finds id starting with customName
+                const customInput = div.querySelector("input[id^='customName']");
                 const descArea = div.querySelector("textarea");
                 const qtyInput = div.querySelector("input[id^='qty']");
                 const rateInput = div.querySelector("input[id^='rate']");
                 
-                // Determine Product Name
                 let pName = select.value;
                 if (pName === "CUSTOM") {
-                    pName = customInput.value; // Take from text box if 'Custom' selected
+                    pName = customInput.value;
                 }
 
                 const pDesc = descArea.value;
@@ -346,7 +342,6 @@
 
                 subtotal += amount;
 
-                // Combine Name and Desc
                 const itemContent = pDesc ? `${pName}\n(${pDesc})` : pName;
 
                 rows.push([
@@ -433,6 +428,8 @@
             bankY += 5;
             doc.text("A/c No: " + BANK_DETAILS.acNo, bankX, bankY);
             bankY += 5;
+            doc.text("A/c Type: " + BANK_DETAILS.acType, bankX, bankY);
+            bankY += 5;
             doc.text("IFSC Code: " + BANK_DETAILS.ifsc, bankX, bankY);
 
             if (qrImg) {
@@ -451,7 +448,12 @@
             doc.text("For " + COMPANY_NAME, 195, footerY - 5, { align: "right" });
             doc.text("Authorized Signatory", 195, footerY + 15, { align: "right" });
 
-            doc.save("proforma_invoice.pdf");
+            // --- SAVE AS CLIENT NAME ---
+            let clientName = document.getElementById("name").value.trim();
+            // Replace / and \ with _ to prevent errors, fallback to 'Invoice' if empty
+            let safeName = clientName.replace(/[\/\\:*?"<>|]/g, "_") || "Invoice";
+            
+            doc.save(`${safeName}.pdf`);
         }
     </script>
 </body>
